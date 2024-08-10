@@ -57,6 +57,12 @@
             <version>1.7.36</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.75</version> <!-- 请检查是否有更新的版本 -->
+        </dependency>
+
 
         <!--        &lt;!&ndash; Log4j for Hadoop Logging &ndash;&gt;-->
 <!--        <dependency>-->
