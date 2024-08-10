@@ -30,6 +30,32 @@ MapReduce 是一种分布式计算模型，用于处理和生成大数据集。�
     - 输出：每个类别中最受欢迎的商品
 
    Reduce 函数会统计每个商品的浏览和购买次数，找出每个类别中最受欢迎的商品。
+### 目录结构
+```shell
+.
+├── README.md
+├── application.log                                    # hadoop本地测试日志
+├── pom.xml
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── example
+│   │   │           ├── CategoryPartition.java
+│   │   │           ├── FindPopularItem.java           # 运行主类
+│   │   │           ├── FindPopularItemMapper.java     # Mapper
+│   │   │           ├── FindPopularItemReducer.java    # Reducer
+│   │   │           └── LogRecords.java
+│   │   ├── python
+│   │   │   ├── generate_log_data.py                   # 数据生成脚本
+│   │   │   └── python.iml
+│   │   └── resources
+│   │       ├── ecommerce_logs.json                    # json数据文件
+│   │       └── log4j.properties
+│   └── test
+│       └── java
+
+```
 
 ### 生成测试数据
 
