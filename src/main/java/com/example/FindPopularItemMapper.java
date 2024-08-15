@@ -2,6 +2,7 @@ package com.example;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Counter;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
@@ -16,7 +17,11 @@ public class FindPopularItemMapper extends Mapper<LongWritable, Text, LogRecords
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        System.out.printf("key: %s, value: %s\n", key, JSON.parseObject(value.toString()));
+//        System.out.printf("key: %s, value: %s\n", key, JSON.parseObject(value.toString()));
+
+        //方式1: 定义计数器
+        Counter counter =  context.getCounter("MR_COUNTER", "partition_counter");
+        counter.increment(1L);
 
         //将json字符串转换成students对象
         logRecord = JSON.parseObject(value.toString(), LogRecords.class);
