@@ -10,8 +10,11 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+
+import static com.example.FileDeleteIfExist.deleteFiles;
 
 public class FlowCount extends Configured implements Tool {
 
@@ -41,6 +44,10 @@ public class FlowCount extends Configured implements Tool {
     }
 
     public static void main(String[] args) throws Exception {
+
+        String dir = "///Users/dg/Documents/tmp/output/FlowCountOutput";
+        deleteFiles(dir);
+
         Configuration conf = new Configuration();
 
         int run = ToolRunner.run(conf, new FlowCount(), args);
