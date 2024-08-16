@@ -76,9 +76,9 @@ public class FlowBean implements Writable {
     public String toString() {
         return "FlowBean{" +
                 "upFlow=" + upFlow +
-                ", downFlow" + downFlow +
-                ", upCountFlow" + upCountFlow +
-                ", downCountFlow" + downCountFlow +
+                ", downFlow=" + downFlow +
+                ", upCountFlow=" + upCountFlow +
+                ", downCountFlow=" + downCountFlow +
                 "}";
     }
 
