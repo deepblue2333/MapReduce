@@ -1,4 +1,4 @@
-# WordCount MapReduce程序
+# Flowcount MapReduce程序
 ### 运行方法
 在idea设置运行主类为`com.example.WordCount`
 
