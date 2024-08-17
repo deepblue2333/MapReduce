@@ -7,7 +7,11 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 public class TableJoinReducer extends Reducer<Text, Text, Text, NullWritable> {
+
+    private static Logger logger = Logger.getLogger(TableJoinReducer.class);
 
     @Override
     protected void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
@@ -28,7 +32,10 @@ public class TableJoinReducer extends Reducer<Text, Text, Text, NullWritable> {
 
         for (String product : products) {
             for (String order : orders) {
-                String result = product + "," + order;
+                String result = order.split(",")[0] + "," + order.split(",")[1] + "," + product.split(",")[1]+ ","
+                        + product.split(",")[2] + "," + product.split(",")[3];
+
+                logger.info(result);
                 context.write(new Text(result), NullWritable.get());
             }
         }
