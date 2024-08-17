@@ -4,6 +4,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.InputFormat;
 import org.apache.hadoop.mapreduce.Job;
@@ -28,12 +29,15 @@ public class FlowCount extends Configured implements Tool {
         TextInputFormat.setInputPaths(job, new Path("file:///Users/dg/Documents/tmp/input/FlowCountInput"));
 
         job.setMapperClass(FlowCountMapper.class);
-        job.setMapOutputKeyClass(FlowBean.class);
-        job.setMapOutputValueClass(Text.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(IntWritable.class);
+
+        job.setPartitionerClass(FlowPartition.class);
+        job.setNumReduceTasks(4);
 
         job.setReducerClass(FlowCountReducer.class);
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(FlowBean.class);
+        job.setOutputValueClass(IntWritable.class);
 
         job.setOutputFormatClass(TextOutputFormat.class);
         TextOutputFormat.setOutputPath(job, new Path("file:///Users/dg/Documents/tmp/output/FlowCountOutput"));

@@ -14,5 +14,12 @@ Java 的 `compareTo` 方法说明:<br>
 
 例如:o1.compareTo(o2); 返回正数的话，当前对象(调用compareTo方法的对象o1)要 排在比较对象(compareTo 传参对象 o2)后面，返回负数的话，放在前面
 
+### 需求三：手机号码分区
+```sql
+select left(phonenum, 3) phoneArea, sum(uoFlow)
+from data_flow
+group by left(phonenum, 3)
+```
+
 ### 运行方法
 直接运行
