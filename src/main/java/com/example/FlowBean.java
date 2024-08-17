@@ -1,13 +1,13 @@
 package com.example;
 
 import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.io.WritableComparable;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-import java.io.Serializable;
 
-public class FlowBean implements Writable {
+public class FlowBean implements WritableComparable<FlowBean> {
     private Integer upFlow;  // 上行数据包数量
     private Integer downFlow;  // 下行数据包数量
     private Integer upCountFlow;  // 上行总流量
@@ -29,7 +29,12 @@ public class FlowBean implements Writable {
         this.downCountFlow = dataInput.readInt();
     }
 
-    // 无餐构造函数
+    @Override
+    public int compareTo(FlowBean o){
+        return this.upFlow > o.upFlow ? -1:1;
+    }
+
+    // 无参构造函数
     public FlowBean(){
     }
 
