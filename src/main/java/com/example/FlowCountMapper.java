@@ -6,7 +6,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-public class FlowCountMapper extends Mapper<LongWritable, Text, Text, FlowBean> {
+public class FlowCountMapper extends Mapper<LongWritable, Text, FlowBean, Text> {
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
@@ -18,9 +18,9 @@ public class FlowCountMapper extends Mapper<LongWritable, Text, Text, FlowBean> 
         flowBean.setUpCountFlow(Integer.parseInt(value.toString().split("\t")[8]));
         flowBean.setDownCountFlow(Integer.parseInt(value.toString().split("\t")[9]));
 
-//        System.out.println(flowBean.toString());
+        System.out.println(flowBean.toString());
 
-        context.write(phonenum, flowBean);
+        context.write(flowBean, phonenum);
     }
 
 }

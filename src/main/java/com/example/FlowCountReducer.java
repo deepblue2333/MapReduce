@@ -7,28 +7,14 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 
-public class FlowCountReducer extends Reducer<Text, FlowBean, Text, FlowBean> {
+public class FlowCountReducer extends Reducer<FlowBean, Text, Text, FlowBean> {
 
     @Override
-    public void reduce(Text key, Iterable<FlowBean> values, Context context) throws IOException, InterruptedException {
-        Integer upFlowSum = 0;
-        Integer downFlowSum = 0;
-        Integer upFlowCountSum = 0;
-        Integer downFlowCountSum = 0;
+    public void reduce(FlowBean key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 
-        for (FlowBean flowBean : values) {
-            upFlowSum += flowBean.getUpFlow();
-            downFlowSum += flowBean.getDownFlow();
-            upFlowCountSum += flowBean.getUpCountFlow();
-            downFlowCountSum += flowBean.getDownCountFlow();
+        for (Text phonenum : values) {
+            System.out.println(key);
+            context.write(phonenum, key);
         }
-
-        FlowBean flowBean = new FlowBean();
-        flowBean.setUpFlow(upFlowSum);
-        flowBean.setDownFlow(downFlowSum);
-        flowBean.setUpCountFlow(upFlowCountSum);
-        flowBean.setDownCountFlow(downFlowCountSum);
-
-        context.write(key, flowBean);
     }
 }

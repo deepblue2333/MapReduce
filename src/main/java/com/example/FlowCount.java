@@ -28,8 +28,8 @@ public class FlowCount extends Configured implements Tool {
         TextInputFormat.setInputPaths(job, new Path("file:///Users/dg/Documents/tmp/input/FlowCountInput"));
 
         job.setMapperClass(FlowCountMapper.class);
-        job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(FlowBean.class);
+        job.setMapOutputKeyClass(FlowBean.class);
+        job.setMapOutputValueClass(Text.class);
 
         job.setReducerClass(FlowCountReducer.class);
         job.setOutputKeyClass(Text.class);
